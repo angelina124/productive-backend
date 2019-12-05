@@ -4,33 +4,12 @@ from sqlalchemy.orm import relationship
 
 db = SQLAlchemy()
 
-user_water_association_table = Table('user_water_association', db.Model.metadata,
-    Column('user_id', db.Integer, ForeignKey('users.id')),
-    Column('water_id', db.Integer, ForeignKey('water.id'))
-)
-user_fitness_association_table = Table('user_fitness_association', db.Model.metadata,
-    Column('user_id', db.Integer, ForeignKey('users.id')),
-    Column('fitness_id', db.Integer, ForeignKey('fitness.id'))
-)
-user_sleep_association_table = Table('user_sleep_association', db.Model.metadata,
-    Column('user_id', db.Integer, ForeignKey('users.id')),
-    Column('sleep_id', db.Integer, ForeignKey('sleep.id'))
-)
-user_mood_association_table = Table('user_mood_association', db.Model.metadata,
-    Column('user_id', db.Integer, ForeignKey('users.id')),
-    Column('mood_id', db.Integer, ForeignKey('mood.id'))
-)
-
 
 class User(db.Model):
     __tablename__='users'
     id= db.Column(db.Integer, primary_key=True)
     username= db.Column(db.String, nullable=False)
     password_encrypted= db.Column(db.Integer, nullable=False)
-    water = relationship("Water", secondary=user_water_association_table, back_populates="user")
-    fitness = relationship("Fitness", secondary=user_fitness_association_table, back_populates="user")
-    sleep = relationship("Sleep", secondary=user_sleep_association_table, back_populates="user")
-    mood = relationship("Mood", secondary=user_mood_association_table, back_populates="user")
 
     def __init__(self, **kwargs):
         self.username = kwargs.get('username','')

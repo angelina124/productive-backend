@@ -40,15 +40,7 @@ def create_user():
     db.session.commit()
     return json.dumps({'success': True, 'data':user.serialize()}), 200
 
-@app.route('/api/user/<int:id>/', methods=['DELETE'])
-def delete_user_by_id(id):
-    try:
-        user = User.get(id)
-        db.session.delete(user)
-        db.session.commit()
-        return json.dumps({'success': True, 'data': user}), 200
-    except:
-        return json.dumps({'success': False, 'error': 'Unable to delete user'}), 400
+
 
 
 
