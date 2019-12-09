@@ -24,9 +24,6 @@ with app.app_context():
     db.create_all()
 
 @app.route('/')
-def home_page():
-    return json.dumps({"Test"}), 200
-
 #expect to use this route for the home screen. If new day then a blank
 #datapoint record is created. If not new day, then we get datapoint record
 @app.route('/api/get_data/', methods=['POST'])
