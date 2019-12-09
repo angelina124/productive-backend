@@ -24,9 +24,6 @@ with app.app_context():
     db.create_all()
 
 @app.route('/')
-def home_page():
-    return json.dumps({"Test"}), 200
-
 #expect to use this route for the home screen. If new day then a blank
 #datapoint record is created. If not new day, then we get datapoint record
 @app.route('/api/get_data/', methods=['POST'])
@@ -46,9 +43,6 @@ def create_new_blank_datapoint_record(username, date):
     db.session.commit()
     return datapoint
 
-<<<<<<< HEAD
-
-=======
 #expect to use this route when the user clicks on the water button
 @app.route('/api/get_data/water', methods=['GET'])
 def get_user_water_data():
@@ -143,7 +137,6 @@ def update_user_sleep():
     del data['fitness_data_intensity']
     del data['fitness_data_duration']
     return json.dumps({'success':True, 'data':data}), 200
->>>>>>> dc9a4757f91e42c060f6253bb0d99c13d64052d4
 
 @app.route('/api/update_fitness/', methods=['POST'])
 def update_user_fitness():
